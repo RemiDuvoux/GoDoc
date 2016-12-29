@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <%= simple_form_for @question do |f| %>
+      <%= f.input :category, collection: Category::SPECIALTIES %>
+      <%= f.input :content %>
+      <%= f.submit "Create a question", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

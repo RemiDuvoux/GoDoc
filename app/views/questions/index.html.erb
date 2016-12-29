@@ -1,0 +1,9 @@
+<ul>
+<% @questions.each do |question|%>
+<li><%= question.category.name %>
+<%= question.content %>
+  <%= question.patient.email %>
+</li>
+
+<% end %>
+</ul>
