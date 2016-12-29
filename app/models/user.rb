@@ -5,4 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :questions
+  belongs_to :category
+
+  def is_doctor?
+    if self.is_doctor
+      true
+    else
+      false
+    end
+  end
 end

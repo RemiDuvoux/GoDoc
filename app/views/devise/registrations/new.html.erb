@@ -12,6 +12,7 @@
           <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
           <%= f.input :password_confirmation, required: true %>
           <%= f.input :is_doctor, required: true, label: "Are you a doctor?" %>
+          <%= f.association :category, required: true, label: "What's your specialty?"%>
         </div>
 
         <div class="form-actions">

@@ -1,7 +1,12 @@
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,1) 0%, rgba(0,36,61,1) 50%)">
   <div class="banner-content">
     <h1>Welcome to GoDoc</h1>
+    <% if current_user.present? && current_user.is_doctor? %>
+    <p>Answer now to thousands of patients' questions</p>
+    <%= link_to "Answer now", questions_path, class: "btn btn-primary"  %>
+    <% else %>
     <p>Ask any question to a doctor. Get your answer in 24 hours.</p>
     <%= link_to "Ask now", new_question_path, class: "btn btn-primary"  %>
+    <% end %>
   </div>
 </div>

@@ -1,4 +1,9 @@
+<div class=text-center>
 <h1><%= @question.category.name %></h1>
 <p><%= @question.content %></p>
+<% unless @question.answer.nil? %>
+<h2>Your answer from <%= @question.doctor.email %></h2>
+<p><%= @question.answer %></p>
 
-
+<% end %>
+</div>

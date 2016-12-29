@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   skip_before_action :authenticate_user!, only: :new
 
   def index
-    @questions = Question.all
+    @questions = Question.where(category: current_user.category, status: "pending")
   end
 
   def show
@@ -14,9 +14,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
-
     @question = Question.new(question_params)
-    category = Category.find_by(name: params[:question][:category])
+    category = Category.find(params[:question][:category_id])
     patient = User.find(current_user)
     @question.category = category
     @question.patient = patient
@@ -24,6 +23,22 @@ class QuestionsController < ApplicationController
       redirect_to question_path(@question)
     else
       render :new
+    end
+  end
+
+  def answer
+    @question = Question.find(params[:question_id])
+  end
+
+  def answer_patch
+    question = Question.find(params[:question_id])
+    question.answer = params[:question][:answer]
+    question.doctor = current_user
+    question.status = "answered"
+    if question.save
+      redirect_to question_path(question)
+    else
+      render :answer
     end
   end
 

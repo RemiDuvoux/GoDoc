@@ -50,7 +50,11 @@
     <% end %>
 
     <!-- Button (call-to-action) -->
-    <%= link_to t(".top_call_to_action", default: "Ask a question to a doctor!"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <% if current_user.present? && current_user.is_doctor? %>
+      <%= link_to t(".top_call_to_action", default: "Answer to questions"), questions_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <% else %>
+      <%= link_to t(".top_call_to_action", default: "Ask a question to a doctor!"), new_question_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <% end %>
   </div>
 
   <!-- Dropdown list appearing on mobile only -->
