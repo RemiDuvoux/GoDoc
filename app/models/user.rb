@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :questions
   belongs_to :category
 
+  def show
+    @user = current_user
+  end
+
   def is_doctor?
     if self.is_doctor
       true
