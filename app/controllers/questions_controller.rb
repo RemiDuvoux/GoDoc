@@ -2,7 +2,11 @@ class QuestionsController < ApplicationController
   skip_before_action :authenticate_user!, only: :new
 
   def index
-    @questions = Question.where(category: current_user.category, status: "pending")
+    if current_user.is_doctor?
+      @questions = Question.where(category: current_user.category, status: "pending")
+    else
+      @questions = Question.where(patient: current_user)
+    end
   end
 
   def show
@@ -20,6 +24,7 @@ class QuestionsController < ApplicationController
     @question.category = category
     @question.patient = patient
     if @question.save
+      flash[:notice] = "Question successfully created. We'll update you as soon as a doctor has answered it."
       redirect_to question_path(@question)
     else
       render :new
