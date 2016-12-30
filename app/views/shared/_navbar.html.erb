@@ -62,9 +62,17 @@
     <div class="dropdown">
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-        <li><a href="#">Some mobile link</a></li>
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
+      <% if current_user.present? && current_user.is_doctor? == false %>
+        <li><%= link_to "My questions", questions_path %></li>
+        <li><%= link_to "Ask a new question!", new_question_path%></li>
+        <% end %>
+        <% if current_user.present? %>
+          <li> <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"link-unstyled"%></li>
+        <% else %>
+        <li>
+          <%= link_to "Login", new_user_session_path,class:"link-unstyled" %>
+        </li>
+        <% end %>
       </ul>
     </div>
   </div>
