@@ -6,6 +6,11 @@ class QuestionsController < ApplicationController
       @questions = Question.where(category: current_user.category, status: "pending")
     else
       @questions = Question.where(patient: current_user)
+      @questions.select {|question| question.status == "answered"}.each do |question|
+        question.status = "read"
+        question.save
+      end
+      @questions = Question.where(patient: current_user)
     end
   end
 
