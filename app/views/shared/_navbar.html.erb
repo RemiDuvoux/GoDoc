@@ -65,7 +65,7 @@
       <% if current_user.present? && current_user.is_doctor? == false %>
         <li><%= link_to "My questions", questions_path %></li>
         <li><%= link_to "Ask a new question!", new_question_path%></li>
-      <% else %>
+      <% elsif current_user.present? && current_user.is_doctor? %>
         <li><%= link_to "Questions", questions_path %></li>
       <% end %>
         <% if current_user.present? %>
